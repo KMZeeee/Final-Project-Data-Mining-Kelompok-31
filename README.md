@@ -24,7 +24,7 @@ Dataset yang digunakan bersumber dari **UCI Machine Learning Repository** (Wine 
     * *Fixed acidity, Volatile acidity, Citric acid, Residual sugar, Chlorides, Free sulfur dioxide, Total sulfur dioxide, Density, pH, Sulphates, Alcohol*.
 * **Target Variabel:** `quality` (Dikategorikan menjadi kelas kualitas *Low, Medium, High*).
   
-### Model yang Digunakan
+## Model yang Digunakan
 Beberapa algoritma diuji, yaitu:
 
 - **K-Nearest Neighbors (KNN)**
@@ -33,7 +33,7 @@ Beberapa algoritma diuji, yaitu:
 - **Random Forest**
 - **XGBoost**
 
-### Evaluasi Model
+## Evaluasi Model
 Evaluasi dilakukan menggunakan:
 
 - Accuracy  
