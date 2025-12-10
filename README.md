@@ -23,7 +23,25 @@ Dataset yang digunakan bersumber dari **UCI Machine Learning Repository** (Wine 
 * **Fitur Input (11 Fisikokimia):**
     * *Fixed acidity, Volatile acidity, Citric acid, Residual sugar, Chlorides, Free sulfur dioxide, Total sulfur dioxide, Density, pH, Sulphates, Alcohol*.
 * **Target Variabel:** `quality` (Dikategorikan menjadi kelas kualitas *Low, Medium, High*).
+  
+### Model yang Digunakan
+Beberapa algoritma diuji, yaitu:
 
+- **K-Nearest Neighbors (KNN)**
+- **Support Vector Machine (SVM)**
+- **Decision Tree**
+- **Random Forest**
+- **XGBoost**
+
+### Evaluasi Model
+Evaluasi dilakukan menggunakan:
+
+- Accuracy  
+- Precision  
+- Recall  
+- F1-Score  
+- Confusion Matrix
+  
 ## ⚙️ Alur Kerja & Metodologi
 
 Penelitian ini dilakukan dengan pendekatan sistematis yang terdiri dari tahapan berikut:
@@ -31,7 +49,7 @@ Penelitian ini dilakukan dengan pendekatan sistematis yang terdiri dari tahapan 
 ### 1. Preprocessing Data
 Sebelum pemodelan, data mentah diproses melalui tahapan:
 * **Data Merging:** Menggabungkan dataset *Red Wine* dan *White Wine* menjadi satu kesatuan.
-* **Encoding:** Menambahkan atribut tipe wine dan melakukan *Label Encoding* untuk fitur target dan *one-hot encoding* untuk fitur kategorikal lainnya.
+* **Encoding:** Menambahkan atribut tipe wine dan melakukan *Ordinal Encoding* untuk fitur target dan *one-hot encoding* untuk fitur kategorikal lainnya.
 * **Normalization:** Menggunakan `StandardScaler` untuk menstandarisasi fitur numerik agar memiliki skala yang sama.
 * **Data Splitting:** Membagi data menjadi *Training Set* dan *Testing Set*.
 
@@ -80,11 +98,19 @@ Berikut adalah ringkasan hasil evaluasi model berdasarkan tiga skenario yang diu
 ### Hasil Skenario 3: Interpretasi Model (SHAP)
 *Fitur fisikokimia yang paling mempengaruhi kualitas wine.*
 
-| Peringkat | Fitur | Pengaruh (SHAP) | Interpretasi Bisnis |
-| :---: | :--- | :--- | :--- |
-| **1** | **Alcohol** | **Positif (+)** | Kadar alkohol tinggi adalah indikator utama wine berkualitas baik. |
-| **2** | **Volatile Acidity** | **Negatif (-)** | Kandungan asam asetat yang tinggi merusak rasa dan menurunkan kualitas. |
-| **3** | **Density** | **Positif (+)** | Densitas memiliki korelasi kompleks, cenderung berpengaruh pada wine kualitas menengah. |
+Fitur paling berpengaruh dalam prediksi:
+
+| Rank | Fitur | Pengaruh |
+|------|--------|-----------|
+|  **1** | alcohol | semakin tinggi → kualitas meningkat |
+|  **2** | volatile acidity | tinggi → kualitas menurun |
+| 3 | density | berpengaruh pada kelas buruk & sedang |
+| 4 | sulphates | meningkatkan kualitas dalam jumlah tertentu |
+
+Analisis per kelas:
+- **Kelas 0 (Buruk):** sangat dipengaruhi alcohol rendah + volatile acidity tinggi  
+- **Kelas 1 (Sedang):** dipengaruhi alcohol dan density  
+- **Kelas 2 (Baik):** dipengaruhi alcohol & residual sugar (lebih kecil efeknya)
 
 ## 📝 Kesimpulan
 
